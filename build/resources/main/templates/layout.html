@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head" lang="en">
+    <meta charset="utf-8"/>
+    <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+    <title>InstaTeam</title>
+    <link href='https://fonts.googleapis.com/css?family=Inconsolata:400,700' rel='stylesheet' type='text/css'/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+    <link rel="stylesheet" th:href="@{/normalize.css}"/>
+    <link rel="stylesheet" th:href="@{/site.css}"/>
+</head>
+<body>
+<header th:fragment="header" lang="en">
+    <div class="container">
+        <div class="site-header">
+            <a class="logo" th:href="@{/index}">InstaTeam</a>
+            <a class="new-project button icon-left" th:href="@{/projects/add}"><i class="material-icons">add</i> New Project</a>
+        </div>
+    </div>
+    <div th:if="${flash != null}" class="container">
+        <div th:class="${flash.status} == 'DANGER'? 'alert alert-danger' : 'alert alert-success'" th:text="${flash.message}">
+            <i class="right material-icons" data-close="">close</i>
+        </div>
+    </div>
+</header>
+<nav th:fragment="nav" lang="en">
+    <ul th:with="uri = ${#httpServletRequest.requestURI}">
+        <li th:class="${uri} == '/projects' or ${uri} == '/index' or ${uri} == '/'? 'selected' : ''"><a th:href="@{/projects}">Projects</a></li>
+        <li th:class="${uri} == '/collaborators'? 'selected' : ''"><a th:href="@{/collaborators}">Collaborators</a></li>
+        <li th:class="${uri} == '/roles'? 'selected' : ''"><a th:href="@{/roles}">Roles</a></li>
+    </ul>
+</nav>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="layout :: head"></head>
+    <body>
+        <header th:replace="layout :: header"></header>
+        <nav th:replace="layout :: nav"></nav>
+        <section>
+            <div class="container wrapper">
+                <div class="project-list">
+                    <p th:if="${#lists.isEmpty(projects)}">No projects created yet.</p>
+                    <div class="project" th:each="project : ${projects}">
+                        <h2><a th:href="@{|/projects/${project.id}|}" th:text="${project.name}">Website Project</a></h2>
+                        <p th:text="${project.description}">Description</p>
+                        <p th:text="${#dates.format(project.startDate, 'MMM dd, yyyy')}"></p>
+                        <span class="tag" th:classappend="${#strings.toLowerCase(project.statusCode)}" th:text="${project.statusCode}">Status</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </body>
+</html>
